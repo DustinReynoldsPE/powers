@@ -1,6 +1,6 @@
 # Powers
 
-Structured development workflows for Claude Code using [tk](https://github.com/EnderRealm/ticket/) tickets.
+Structured development workflows for Claude Code using [tk](https://github.com/DustinReynoldsPE/powers/) tickets.
 
 **One ticket = one commit = one push.** Each workflow guides you from idea to shipped code.
 
@@ -23,7 +23,7 @@ Set up the complete powers workflow on a new machine:
 
 ### 1. Prerequisites
 
-Install [tk](https://github.com/EnderRealm/ticket/):
+Install [tk](https://github.com/DustinReynoldsPE/ticket/):
 ```bash
 # Follow tk installation instructions
 ```
@@ -31,7 +31,7 @@ Install [tk](https://github.com/EnderRealm/ticket/):
 ### 2. Clone the Repo
 
 ```bash
-git clone https://github.com/EnderRealm/powers.git ~/code/powers
+git clone https://github.com/DustinReynoldsPE/powers.git ~/code/powers
 cd ~/code/powers
 ```
 
@@ -60,8 +60,8 @@ This gives you:
 
 In Claude Code:
 ```
-/plugin marketplace add EnderRealm/powers
-/plugin install powers@powers
+/plugin marketplace add DustinReynoldsPE/powers
+/plugin install powers@DustinReynoldsPE/powers
 ```
 
 Restart Claude Code. You should see the workflow commands in `/skills`.

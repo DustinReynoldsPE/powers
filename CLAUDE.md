@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Powers is a Claude Code plugin providing skills for ticket-based workflows using [tk](https://github.com/wedow/ticket/).
+Powers is a Claude Code plugin providing skills for ticket-based workflows using [tk](https://github.com/DustinReynoldsPE/ticket/).
 
 ## Architecture
 
@@ -63,4 +63,4 @@ hooks/
 
 ## Dependency
 
-Requires [tk](https://github.com/wedow/ticket/) CLI. Skills verify `tk` is available before proceeding.
+Requires [tk](https://github.com/DustinReynoldsPE/ticket/) CLI. Skills verify `tk` is available before proceeding.

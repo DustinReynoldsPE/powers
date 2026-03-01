@@ -42,24 +42,24 @@
       "mcp__puppeteer__puppeteer_evaluate",
       "mcp__puppeteer__puppeteer_fill"
     ],
-    "ask": [
-      "Bash(rm *)",
-      "Bash(kill *)",
-      "Bash(pkill *)",
-      "Bash(rmdir *)"      
-    ],
     "deny": [
       "Read(./.env)",
       "Bash(killall *)",
       "Bash(dd *)",
       "Bash(mkfs *)"
+    ],
+    "ask": [
+      "Bash(rm *)",
+      "Bash(kill *)",
+      "Bash(pkill *)",
+      "Bash(rmdir *)"
     ]
-  },
-  "enabledPlugins": {
-    "powers@powers-dev": true
   },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "powers@powers-dev": true
   }
 }
