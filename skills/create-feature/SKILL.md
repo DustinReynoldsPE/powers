@@ -7,7 +7,9 @@ description: Start a new feature with structured workflow. Brainstorm → plan �
 
 Complete workflow for implementing a feature: brainstorm, plan, execute, test, finalize, commit, push.
 
-**Mode:** `$ARGUMENTS` may include `--auto` for autonomous execution. Default is interactive.
+**Mode:** `$ARGUMENTS` may include:
+- `--auto` — autonomous execution (skip STOP gates, document all decisions with `(auto)` tag)
+- `--subagent` — dispatch a fresh subagent per plan task with two-stage review (see Phase 4)
 
 ## Phase 1: Brainstorm
 
@@ -103,7 +105,9 @@ tk add-note <ticket-id> "## Plan Review
 
 ## Phase 4: Execute
 
-Implement the feature following the plan.
+**If `--subagent` flag is present:** Invoke `powers:subagent-execution` with the plan from Phase 3. Pass the ticket ID and full plan text. The subagent-execution skill handles dispatching, review loops, and task-level progress. When it completes, proceed to Phase 5 with its summary.
+
+**Otherwise:** Implement the feature following the plan inline.
 
 **As you work:**
 - Track deviations from plan

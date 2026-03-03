@@ -11,6 +11,7 @@ Structured development workflows using tk tickets.
 
 **Start new work:**
 - `/create-feature` — Full feature workflow (brainstorm → plan → execute → test → commit → push)
+- `/create-feature --subagent` — Same workflow, but dispatches a fresh subagent per plan task with two-stage review (spec compliance + code quality). Use for large features with 4+ tasks.
 - `/create-bug` — Lean bug workflow (investigate → fix → test → commit → push)
 
 **Resume existing work:**
@@ -34,6 +35,7 @@ Structured development workflows using tk tickets.
 | Situation | Action |
 |-----------|--------|
 | New feature to build | `/create-feature` |
+| Large feature, many tasks | `/create-feature --subagent` |
 | Bug to fix | `/create-bug` |
 | Resuming from yesterday | `/work-ticket <id>` |
 | Need to think through approach | `/brainstorm` |
