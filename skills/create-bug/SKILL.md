@@ -60,6 +60,17 @@ tk add-note <ticket-id> "## Reproduction
 - If the bug involves CSS, styling, or theming, invoke `powers:css-architecture` for conventions
 - **3-patch rule:** if you've tried 3 patches and the bug persists, your mental model is wrong — stop, re-examine assumptions, and re-engage with the user
 
+### STOP — Present Findings
+
+**Do not proceed to Phase 3 unless the user explicitly asks you to fix it.**
+
+Present a summary to the user:
+1. **Root cause** — what's broken and why
+2. **Proposed fix** — what you intend to change (files, approach)
+3. **Risk assessment** — what else could be affected
+
+Wait for the user to approve the fix approach or redirect.
+
 ## Phase 3: Fix
 
 Implement the fix.
@@ -155,7 +166,8 @@ git push
 ## Auto Mode
 
 When `--auto` is passed:
-- Proceed through phases without confirmation prompts
+- Skip the Phase 2 stop — proceed directly from investigation to fix
+- Proceed through remaining phases without confirmation prompts
 - Document all decisions with `(auto)` tag
 - Add "Questions Considered" section if any arose
 - Still stop on environmental blockers

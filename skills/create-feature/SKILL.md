@@ -31,6 +31,17 @@ Understand the feature before creating a ticket.
 
 **Output:** Clear understanding of problem, solution, success criteria, constraints.
 
+### STOP — Confirm Understanding
+
+**Do not proceed to Phase 2 unless the user explicitly says to continue.**
+
+Present a summary:
+1. **Problem** — what we're solving
+2. **Proposed solution** — high-level approach
+3. **Scope** — estimated size (small/medium/large)
+
+Wait for confirmation or course correction before creating the ticket.
+
 ## Phase 2: Create Ticket
 
 ```bash
@@ -117,6 +128,17 @@ tk add-note <ticket-id> "## Execute
 - Self-inflicted errors (syntax, typos): Retry until solved
 - Environmental blockers (server down): Stop and surface
 - Approach issues: Document and ask
+
+### STOP — Implementation Complete
+
+**Do not proceed to Phase 5 unless the user explicitly says to continue.**
+
+Present a summary:
+1. **What was built** — files created/modified, components added
+2. **Deviations from plan** — anything that changed during implementation
+3. **Ready for testing** — what to verify
+
+Wait for the user to review before proceeding to test.
 
 ## Phase 5: Test
 
@@ -208,7 +230,7 @@ git push
 ## Auto Mode
 
 When `--auto` is passed:
-- Proceed through phases without confirmation prompts
+- Skip all STOP points — proceed through phases without confirmation prompts
 - Document all decisions with `(auto)` tag
 - Add "Questions Considered" section:
 
