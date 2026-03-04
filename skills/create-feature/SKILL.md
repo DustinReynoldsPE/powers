@@ -56,6 +56,21 @@ tk create "<feature title>" \
 
 Record the ticket ID for later phases.
 
+## Phase 2.5: Create Worktree
+
+Set up an isolated workspace for this feature. Follow `powers:using-git-worktrees`:
+
+```bash
+git checkout main
+git pull --ff-only
+git worktree add .claude/worktrees/<ticket-id> -b <ticket-id>
+cd .claude/worktrees/<ticket-id>
+```
+
+Run project setup and test baseline per the worktree skill.
+
+**Skip when:** Working directly on the current branch (quick fix, no PR needed).
+
 ## Phase 3: Plan
 
 Define implementation steps with key decisions.
@@ -220,12 +235,22 @@ git commit -m "[<ticket-id>] <imperative description>"
 - All files changed for this feature
 - Updated ticket file from `.tickets/`
 
-## Phase 8: Push
+## Phase 8: Finish Branch
 
 ```bash
 tk edit <ticket-id> --status needs_testing
-git add .tickets/<ticket-id>.md
-git commit --amend --no-edit
+```
+
+Follow `powers:finishing-branch` to complete the work. Present the four options:
+
+1. **Create PR** (recommended) — push branch, create PR via `gh`
+2. **Merge locally** — merge into main, push, clean up worktree
+3. **Keep as-is** — leave branch and worktree in place
+4. **Discard** — delete branch and worktree (destructive, confirm first)
+
+**If not using a worktree** (skipped Phase 2.5), fall back to direct push:
+
+```bash
 git push
 ```
 

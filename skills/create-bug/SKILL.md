@@ -21,6 +21,19 @@ tk create "<bug title>" \
 
 Record the ticket ID for later phases.
 
+## Phase 1.5: Create Worktree (optional)
+
+For bugs that need branch isolation or PR-based review, set up a worktree. Follow `powers:using-git-worktrees`:
+
+```bash
+git checkout main
+git pull --ff-only
+git worktree add .claude/worktrees/<ticket-id> -b <ticket-id>
+cd .claude/worktrees/<ticket-id>
+```
+
+**Skip when:** Quick fix on the current branch, no PR needed.
+
 ## Phase 2: Investigate
 
 Find the root cause. For standalone debugging without the full bug workflow, use `/investigate`.
@@ -152,12 +165,17 @@ git commit -m "[<ticket-id>] Fix <concise description>"
 - All files changed for this fix
 - Updated ticket file from `.tickets/`
 
-## Phase 7: Push
+## Phase 7: Finish Branch
 
 ```bash
 tk edit <ticket-id> --status needs_testing
-git add .tickets/<ticket-id>.md
-git commit --amend --no-edit
+```
+
+**If using a worktree** (Phase 1.5): Follow `powers:finishing-branch` to complete the work. Present the four options (Create PR, Merge locally, Keep as-is, Discard).
+
+**If not using a worktree:** Push directly:
+
+```bash
 git push
 ```
 
