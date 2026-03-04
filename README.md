@@ -2,7 +2,7 @@
 
 Structured development workflows for Claude Code using [tk](https://github.com/DustinReynoldsPE/powers/) tickets.
 
-**One ticket = one commit = one push.** Each workflow guides you from idea to shipped code.
+**One ticket = one branch = one PR.** Each workflow guides you from idea to shipped code in an isolated worktree.
 
 ## Quick Start
 
@@ -72,8 +72,9 @@ Restart Claude Code. You should see the workflow commands in `/skills`.
 
 | Command | Description |
 |---------|-------------|
-| `/create-feature` | Full feature workflow: brainstorm → plan → execute → test → commit → push |
-| `/create-bug` | Lean bug workflow: investigate → fix → test → commit → push |
+| `/create-feature` | Full feature workflow: brainstorm → worktree → plan → execute → test → finish branch |
+| `/create-feature --subagent` | Same workflow with fresh subagent per plan task and two-stage review |
+| `/create-bug` | Lean bug workflow: investigate → fix → test → finish branch |
 | `/work-ticket <id>` | Resume work on existing ticket based on type and state |
 
 ### Ticket Management
@@ -102,6 +103,21 @@ Restart Claude Code. You should see the workflow commands in `/skills`.
 |-------|-------------|
 | `plan-reviewer` | Validates implementation plans against the codebase (read-only, returns structured review) |
 
+## Branch-Based Workflow
+
+Every feature and bug fix follows a branch isolation pattern:
+
+1. **Create ticket** — `tk create` captures the work item
+2. **Create worktree** — `git worktree add .claude/worktrees/<ticket-id> -b <ticket-id>` isolates work on a dedicated branch
+3. **Work in isolation** — plan, implement, and test inside the worktree
+4. **Finish branch** — choose how to land the work:
+   - **Create PR** (recommended) — push branch, open PR via `gh` for review
+   - **Merge locally** — `git merge --no-ff` into main
+   - **Keep as-is** — leave branch in place for later
+   - **Discard** — delete branch and worktree
+
+For large features with 4+ plan tasks, use `--subagent` to dispatch a fresh subagent per task with two-stage review (spec compliance, then code quality). This prevents context drift on long-running implementations.
+
 ## Workflow Principles
 
 - **Phases always run**, scaled to task size
@@ -115,7 +131,7 @@ Restart Claude Code. You should see the workflow commands in `/skills`.
 Workflows end by setting tickets to `needs_testing` status, not `closed`. This signals that:
 
 1. The agent has completed implementation
-2. Code is committed and pushed
+2. Code is committed and pushed (or PR is open)
 3. Human (or agent) testing is required before closure
 
 To close a ticket after verification:
@@ -178,6 +194,9 @@ skills/
   work-ticket/        # /work-ticket resume logic
   brainstorming/      # /brainstorm design sessions
   investigate/        # /investigate debugging methodology
+  using-git-worktrees/  # Branch isolation per ticket
+  finishing-branch/   # 4-option branch completion (PR/merge/keep/discard)
+  subagent-execution/ # Per-task subagent dispatch with two-stage review
   css-architecture/   # CSS token system and semantic styling
   create-tickets/     # Epic/task generation
   using-powers/       # Session start context
