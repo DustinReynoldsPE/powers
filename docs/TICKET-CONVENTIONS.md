@@ -176,7 +176,7 @@ When running with `--auto`, document questions that would have been asked:
 ---
 id: p-1234
 type: feature
-status: open
+stage: triage
 ---
 # Add user form validation
 
@@ -253,7 +253,7 @@ Verified via Puppeteer:
 ---
 id: p-5678
 type: bug
-status: open
+stage: triage
 ---
 # Login fails silently when session expired
 

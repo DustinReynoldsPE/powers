@@ -168,7 +168,7 @@ git commit -m "[<ticket-id>] Fix <concise description>"
 ## Phase 7: Finish Branch
 
 ```bash
-tk edit <ticket-id> --status needs_testing
+tk advance <ticket-id> --to test
 ```
 
 **If using a worktree** (Phase 1.5): Follow `powers:finishing-branch` to complete the work. Present the four options (Create PR, Merge locally, Keep as-is, Discard).

@@ -1,6 +1,6 @@
 ---
 name: finishing-branch
-description: Complete work on a development branch. Use after tests pass to merge locally, create a PR, keep the branch, or discard it. Handles worktree cleanup and ticket status updates.
+description: Complete work on a development branch. Use after tests pass to merge locally, create a PR, keep the branch, or discard it. Handles worktree cleanup and ticket stage updates.
 ---
 
 # Finishing a Development Branch
@@ -31,14 +31,14 @@ If uncommitted changes exist, stop:
 If tests fail, stop:
 > Tests are failing. Fix before finishing, or use `--force` to override.
 
-### 3. Ticket status
+### 3. Ticket stage
 
 ```bash
 tk show <ticket-id>
 ```
 
-Ticket should be at `needs_testing` or later. If still `in_progress` or `open`, warn:
-> Ticket is still `<status>`. Update to `needs_testing` before finishing, or proceed anyway?
+Ticket should be at `test` or later. If still at `implement` or earlier, warn:
+> Ticket is still at `<stage>`. Advance to `test` before finishing, or proceed anyway?
 
 ## Finish Options
 
@@ -78,7 +78,7 @@ git push -u origin <ticket-id>
 
 **After PR created:**
 ```bash
-tk edit <ticket-id> --status needs_testing
+tk advance <ticket-id> --to test
 tk add-note <ticket-id> "PR created: <pr-url>"
 ```
 
@@ -105,7 +105,7 @@ git push
 
 **After merge:**
 ```bash
-tk edit <ticket-id> --status needs_testing
+tk advance <ticket-id> --to test
 
 # Clean up worktree and branch
 git worktree remove .claude/worktrees/<ticket-id>
@@ -114,7 +114,7 @@ git branch -d <ticket-id>
 
 ### Option 3: Keep As-Is
 
-Leave the branch and worktree in place. No cleanup, no status change.
+Leave the branch and worktree in place. No cleanup, no stage change.
 
 Use when:
 - Work is not done but you want to pause
@@ -151,7 +151,7 @@ git push origin --delete <ticket-id> 2>/dev/null || true
 
 **After discard:**
 ```bash
-tk edit <ticket-id> --status open
+tk advance <ticket-id> --to triage
 tk add-note <ticket-id> "Branch discarded. Work was deleted."
 ```
 
@@ -167,12 +167,12 @@ If no worktree found, skip `git worktree remove` in all paths.
 
 ## Summary of Outcomes
 
-| Option | Branch | Worktree | Remote | Ticket Status |
-|--------|--------|----------|--------|---------------|
-| Create PR | kept | kept | pushed | `needs_testing` |
-| Merge locally | deleted | deleted | pushed (via main) | `needs_testing` |
+| Option | Branch | Worktree | Remote | Ticket Stage |
+|--------|--------|----------|--------|--------------|
+| Create PR | kept | kept | pushed | `test` |
+| Merge locally | deleted | deleted | pushed (via main) | `test` |
 | Keep as-is | kept | kept | no change | no change |
-| Discard | deleted | deleted | deleted (if pushed) | `open` |
+| Discard | deleted | deleted | deleted (if pushed) | `triage` |
 
 ## Error Handling
 

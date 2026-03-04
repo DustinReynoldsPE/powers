@@ -128,18 +128,18 @@ For large features with 4+ plan tasks, use `--subagent` to dispatch a fresh suba
 
 ## Testing Handoff
 
-Workflows end by setting tickets to `needs_testing` status, not `closed`. This signals that:
+Workflows end by advancing tickets to the `test` stage, not `done`. This signals that:
 
 1. The agent has completed implementation
 2. Code is committed and pushed (or PR is open)
-3. Human (or agent) testing is required before closure
+3. Human (or agent) testing is required before advancing to `done`
 
-To close a ticket after verification:
+To advance a ticket after verification:
 ```bash
-tk edit <ticket-id> --status closed
+tk advance <ticket-id> --to done
 ```
 
-Use `tk ls --status=needs_testing` to see tickets awaiting verification.
+Use `tk pipeline --stage test` to see tickets awaiting verification.
 
 ## Learning Extraction
 

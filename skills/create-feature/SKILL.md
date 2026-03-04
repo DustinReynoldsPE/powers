@@ -238,7 +238,7 @@ git commit -m "[<ticket-id>] <imperative description>"
 ## Phase 8: Finish Branch
 
 ```bash
-tk edit <ticket-id> --status needs_testing
+tk advance <ticket-id> --to test
 ```
 
 Follow `powers:finishing-branch` to complete the work. Present the four options:

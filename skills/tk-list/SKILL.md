@@ -7,7 +7,7 @@ Run `tk ls` with any filters provided by the user.
 
 ## Common Filters
 
-- `--status=open` or `--status=closed` or `--status=in_progress`
+- `--stage=<stage>` to filter by pipeline stage (triage, spec, design, implement, test, verify, done)
 - `-t, --type=<type>` to filter by type (bug, feature, task, epic, chore)
 - `-P, --priority=<0-4>` to filter by priority
 - `--parent=<epic-id>` to list child tickets
@@ -26,7 +26,7 @@ Run `tk ls` with any filters provided by the user.
 
 ```bash
 tk ls                          # All open tickets
-tk ls --status=closed          # Closed tickets
+tk ls --stage=done             # Completed tickets
 tk ls --parent=p-1234          # Children of epic
 tk ls -t bug                   # All bugs
 tk ls -t feature -P 1          # High-priority features

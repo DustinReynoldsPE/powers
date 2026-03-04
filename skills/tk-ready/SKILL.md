@@ -5,7 +5,7 @@ description: Show tickets ready to work on (no unresolved dependencies)
 
 Run `tk ready` and display the results.
 
-Ready tickets are open or in-progress tickets whose dependencies are all resolved and whose parent is in_progress. These are the tickets you can work on right now.
+Ready tickets are tickets whose dependencies are all resolved and whose parent is at `implement` stage or later. These are the tickets you can work on right now.
 
 ## Usage
 
@@ -16,4 +16,4 @@ tk ready -a steve       # Ready tickets assigned to steve
 ```
 
 Note: `ready` supports `-a` (assignee) and `-T` (tag) filters only.
-To filter ready tickets by type, use `tk query '.status == "open"  and .type == "feature"'` or pipe: `tk ready | grep feature`.
+To filter ready tickets by type, use `tk query '.stage != "done" and .type == "feature"'` or pipe: `tk ready | grep feature`.

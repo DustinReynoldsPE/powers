@@ -18,7 +18,7 @@ tk show <ticket-id>
 
 Extract:
 - **Type:** feature, bug, task, epic, chore
-- **Status:** open, in_progress, needs_testing, closed
+- **Stage:** triage, spec, design, implement, test, verify, done
 - **Content:** Look for checkpoint comments and existing sections
 
 ## Step 2: Find Current State
@@ -139,9 +139,9 @@ Reads ticket, finds `<!-- checkpoint: investigating -->`, proceeds to fix autono
 Ticket <id> not found. Check the ID and try again.
 ```
 
-**Ticket already closed:**
+**Ticket already done:**
 ```
-Ticket <id> is already closed. Reopen with `tk edit <id> --status open` to continue.
+Ticket <id> is at stage done. Move back with `tk advance <id> --to triage` to continue.
 ```
 
 **Ambiguous state:**

@@ -57,7 +57,7 @@ Structured development workflows using tk tickets.
 ```bash
 # Viewing
 tk ls                            # open tickets
-tk ls --status=in_progress       # filter by status
+tk pipeline                      # tickets by pipeline stage
 tk ls -t feature                 # filter by type (-t lowercase)
 tk ls --parent=<epic-id>         # children of epic
 tk ready                         # unblocked tickets
@@ -65,12 +65,12 @@ tk show <id>                     # ticket details
 
 # Creating & editing
 tk create "Title" -t feature     # create ticket
-tk edit <id> --status closed     # update fields
+tk advance <id>                  # advance to next stage
 tk add-note <id> "text"          # append note
 
 # Query (JSON output)
 tk query                                        # all tickets as JSONL
-tk query '.status == "open"'                    # jq filter (auto-wrapped in select)
+tk query '.stage != "done"'                     # jq filter (auto-wrapped in select)
 tk query '.type == "bug" and .priority <= 1'    # compound filter
 tk query '.title | test("deploy"; "i")'         # regex search
 ```
