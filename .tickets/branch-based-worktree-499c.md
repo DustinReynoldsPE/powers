@@ -1,15 +1,15 @@
 ---
 id: branch-based-worktree-499c
 stage: triage
-status: open
+status: needs_testing
 deps: []
 links: []
 created: 2026-03-03T22:23:16Z
 type: epic
 priority: 1
+version: 1
 ---
 # Branch-based worktree workflow
-
 
 Adopt branch-per-feature workflow: each feature gets a branch, works in a git worktree, and finishes with a PR. Replaces the current always-commit-and-push-to-current-branch approach. Based on gaps identified in powers-vs-superpowers comparison.
 

@@ -1,14 +1,14 @@
 ---
 id: branch-finishing-workflow-1c6f
 stage: triage
-status: needs_testing
+status: closed
 deps: [git-worktree-integration-9f15]
 links: []
 created: 2026-03-03T22:23:35Z
 type: feature
 priority: 1
 parent: branch-based-worktree-499c
-version: 3
+version: 4
 ---
 # Branch finishing workflow skill
 
