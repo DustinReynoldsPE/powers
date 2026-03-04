@@ -1,16 +1,16 @@
 ---
 id: git-worktree-integration-9f15
 stage: triage
-status: open
+status: in_progress
 deps: []
 links: []
 created: 2026-03-03T22:23:25Z
 type: feature
 priority: 1
 parent: branch-based-worktree-499c
+version: 1
 ---
 # Git worktree integration skill
-
 
 Create a using-git-worktrees skill that creates isolated workspaces per ticket. Branch name derived from ticket ID. Handles: worktree creation, .gitignore verification, project setup (bun install etc), test baseline verification. Maps each worktree to a tk ticket ID.
 

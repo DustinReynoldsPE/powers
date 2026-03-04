@@ -55,11 +55,13 @@
       "Bash(rmdir *)"
     ]
   },
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "powers@powers-dev": true
+    "powers@powers-dev": true,
+    "context-mode@claude-context-mode": true
   }
 }

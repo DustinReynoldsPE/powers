@@ -131,9 +131,9 @@ Powers includes hooks that capture session knowledge before it's lost to context
 
 **PreCompact hook** — Prompts Claude to produce a structured session summary (tickets, decisions, problems, discoveries, incomplete work) while it still has full context.
 
-**SessionEnd hook** — Extracts the summary from the session transcript and pushes it to the [learnings](https://github.com/EnderRealm/learnings) repo.
+**SessionEnd hook** — Extracts the summary from the session transcript and pushes it to the [learnings](https://github.com/DustinReynoldsPE/learnings) repo.
 
-Summaries are processed nightly by the [Manager](https://github.com/EnderRealm/manager) repo's extraction pipeline:
+Summaries are processed nightly by the [Manager](https://github.com/DustinReynoldsPE/manager) repo's extraction pipeline:
 1. Catch-up: summarize any missed sessions
 2. Extract: create tickets from unresolved problems, discoveries, incomplete work
 3. Detect patterns: identify recurring themes across sessions and projects
@@ -141,7 +141,7 @@ Summaries are processed nightly by the [Manager](https://github.com/EnderRealm/m
 
 ### Nightly Pipeline Setup
 
-The nightly job runs from the [Manager](https://github.com/EnderRealm/manager) repo. Requires Bash 5+ (`brew install bash`).
+The nightly job runs from the [Manager](https://github.com/DustinReynoldsPE/manager) repo. Requires Bash 5+ (`brew install bash`).
 
 **Run manually:**
 ```bash

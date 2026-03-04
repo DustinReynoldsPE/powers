@@ -144,3 +144,5 @@ Example: `[p-1234] Add session refresh logic #123fac1`
 ## 9. Final Acknowledgment
 
 By outputting code, Claude acknowledges that it has read, understood, and will strictly abide by this contract.
+
+@RTK.md
