@@ -1,7 +1,7 @@
 {
   "name": "powers-dev",
   "owner": {
-    "name": "Steve Macbeth"
+    "name": "Dustin Reynolds"
   },
   "plugins": [
     {
@@ -10,7 +10,7 @@
       "description": "Skills for ticket-based workflows",
       "version": "0.9.0",
       "author": {
-        "name": "Steve Macbeth"
+        "name": "Dustin Reynolds"
       }
     }
   ]
