@@ -22,7 +22,7 @@
         ]
       }
     ],
-    "PostEdit": [
+    "PostToolUse": [
       {
         "matcher": "Edit|Write",
         "hooks": [
