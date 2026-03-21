@@ -8,7 +8,7 @@
       "name": "powers",
       "source": "./",
       "description": "Skills for ticket-based workflows",
-      "version": "0.8.0",
+      "version": "0.9.0",
       "author": {
         "name": "Steve Macbeth"
       }

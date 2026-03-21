@@ -1,194 +1,61 @@
 ---
 name: finishing-branch
-description: Complete work on a development branch. Use after tests pass to merge locally, create a PR, keep the branch, or discard it. Handles worktree cleanup and ticket stage updates.
+description: Complete work on a development branch. Closes worktree if one exists. Use after tests pass.
 ---
 
-# Finishing a Development Branch
+# Finishing a Branch
 
-Complete work on a ticket branch. Verifies readiness, presents finish options, cleans up worktree and branch.
+**Identity:** Completes a feature or bug branch. Handles worktree cleanup. Always called as the last step of `create-feature`, `create-bug`, or `work-ticket`.
 
-**Called by:** `create-feature` Phase 7-8, `create-bug` equivalent phase, or invoked manually.
+## Pre-Flight
 
-## Pre-Flight Checks
+Before choosing an option, verify:
+1. All changes committed (`git status` is clean)
+2. Tests pass
+3. Ticket advanced to correct stage (`tk advance <id>` if not done)
 
-Before presenting options, verify:
+## Options
 
-### 1. All changes committed
-
+**Option 1 — Pull Request (default for features)**
 ```bash
-git status --porcelain
+git push -u origin <branch>
+gh pr create --title "<title>" --body "<summary>"
 ```
+Then clean up worktree (see below).
 
-If uncommitted changes exist, stop:
-> Uncommitted changes detected. Commit or stash before finishing.
-
-### 2. Tests pass
-
+**Option 2 — Merge locally (for chores, small tasks)**
 ```bash
-# Detect and run test suite (same detection as using-git-worktrees Step 4)
+cd <repo-root>
+git merge --no-ff <branch> -m "Merge <branch>"
 ```
+Then clean up worktree (see below).
 
-If tests fail, stop:
-> Tests are failing. Fix before finishing, or use `--force` to override.
+**Option 3 — Keep branch (work in progress)**
+Write checkpoint block to ticket. Stop here.
 
-### 3. Ticket stage
-
+**Option 4 — Discard**
 ```bash
-tk show <ticket-id>
+cd <repo-root>
+git worktree remove .claude/worktrees/<ticket-id> --force
+git branch -D <ticket-id>
 ```
+Update ticket: `tk add-note <id> "Discarded: <reason>"`
 
-Ticket should be at `test` or later. If still at `implement` or earlier, warn:
-> Ticket is still at `<stage>`. Advance to `test` before finishing, or proceed anyway?
+## Worktree Cleanup (Options 1 & 2)
 
-## Finish Options
-
-Present these four options to the user:
-
-### Option 1: Create Pull Request (recommended)
-
-Push branch and create a PR for review.
-
+After merge or PR is open:
 ```bash
-# Push branch to remote
-git push -u origin <ticket-id>
-
-# Create PR with ticket context
-gh pr create \
-  --title "[<ticket-id>] <ticket title>" \
-  --body "$(cat <<'EOF'
-## Summary
-<1-3 bullet points describing the change>
-
-## Ticket
-`<ticket-id>`: <ticket title>
-
-## Test plan
-<verification steps>
-EOF
-)"
-```
-
-**If `gh` is not authenticated:**
-> `gh` CLI is not authenticated. Push the branch manually and create PR at:
-> `https://github.com/<owner>/<repo>/pull/new/<ticket-id>`
-
-```bash
-git push -u origin <ticket-id>
-```
-
-**After PR created:**
-```bash
-tk advance <ticket-id> --to test
-tk add-note <ticket-id> "PR created: <pr-url>"
-```
-
-Worktree is **kept** — work may continue if PR review requests changes. The user can clean up later with Option 4 after merge.
-
-### Option 2: Merge Locally
-
-Merge the branch into main without a PR.
-
-```bash
-# Return to main repo
-cd <original-repo-path>
-
-# Update main
-git checkout main
-git pull --ff-only
-
-# Merge with merge commit for history
-git merge --no-ff <ticket-id> -m "[<ticket-id>] <ticket title>"
-
-# Push
-git push
-```
-
-**After merge:**
-```bash
-tk advance <ticket-id> --to test
-
-# Clean up worktree and branch
+cd <repo-root>
 git worktree remove .claude/worktrees/<ticket-id>
 git branch -d <ticket-id>
 ```
 
-### Option 3: Keep As-Is
+If no worktree was used, skip cleanup.
 
-Leave the branch and worktree in place. No cleanup, no stage change.
+## Quality Gates
+- Branch merged or PR open
+- Worktree removed (if one existed)
+- Ticket at correct stage
 
-Use when:
-- Work is not done but you want to pause
-- Waiting on external dependency
-- Want to review before deciding
-
-```bash
-tk add-note <ticket-id> "Branch <ticket-id> kept as-is. Resume with /work-ticket <ticket-id>."
-```
-
-### Option 4: Discard
-
-Delete the branch and all work on it. **This is destructive and irreversible.**
-
-Confirm before proceeding:
-> This will delete branch `<ticket-id>` and all commits on it. Are you sure?
-
-Only proceed with explicit confirmation.
-
-```bash
-# Return to main repo
-cd <original-repo-path>
-git checkout main
-
-# Remove worktree (force — may have changes)
-git worktree remove --force .claude/worktrees/<ticket-id>
-
-# Delete branch
-git branch -D <ticket-id>
-
-# Delete remote branch if pushed
-git push origin --delete <ticket-id> 2>/dev/null || true
-```
-
-**After discard:**
-```bash
-tk advance <ticket-id> --to triage
-tk add-note <ticket-id> "Branch discarded. Work was deleted."
-```
-
-## Working Without a Worktree
-
-If the branch was created without a worktree (direct `git checkout -b`), the same options apply but skip worktree cleanup steps. Detect by checking:
-
-```bash
-git worktree list | grep <ticket-id>
-```
-
-If no worktree found, skip `git worktree remove` in all paths.
-
-## Summary of Outcomes
-
-| Option | Branch | Worktree | Remote | Ticket Stage |
-|--------|--------|----------|--------|--------------|
-| Create PR | kept | kept | pushed | `test` |
-| Merge locally | deleted | deleted | pushed (via main) | `test` |
-| Keep as-is | kept | kept | no change | no change |
-| Discard | deleted | deleted | deleted (if pushed) | `triage` |
-
-## Error Handling
-
-| Situation | Behavior |
-|-----------|----------|
-| `gh` not authenticated | Fall back to manual push + URL |
-| Merge conflicts on local merge | Stop, surface conflict, ask user to resolve |
-| Remote push fails | Surface error, suggest `git pull --rebase` |
-| Worktree removal fails | Retry with `--force` if user chose discard |
-| Branch already merged | Skip merge, proceed to cleanup |
-
-## Integration
-
-**Called by:**
-- `powers:create-feature` Phase 7-8
-- `powers:create-bug` equivalent phase
-
-**References:**
-- `powers:using-git-worktrees` for cleanup procedures
+## Exit Protocol
+Write `<!-- checkpoint: finalized -->` to ticket file.

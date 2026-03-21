@@ -61,7 +61,6 @@
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "powers@powers-dev": true,
     "context-mode@claude-context-mode": true
   }
 }
