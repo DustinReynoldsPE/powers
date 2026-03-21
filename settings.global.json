@@ -54,13 +54,5 @@
       "Bash(pkill *)",
       "Bash(rmdir *)"
     ]
-  },
-  "model": "opus",
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh"
-  },
-  "enabledPlugins": {
-    "context-mode@claude-context-mode": true
   }
 }
