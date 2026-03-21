@@ -16,8 +16,8 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Before this context is compacted, create a session summary.\n\nIMPORTANT: Do not include secrets, API keys, tokens, passwords, or personal data. Redact with [REDACTED] if referencing sensitive values.\n\nWrap the entire summary in sentinel markers exactly as shown.\n\n## Format\n\n<!-- BEGIN_SESSION_SUMMARY -->\n\n### Ticket(s)\nList ticket ID(s) worked on this session (e.g., p-1234, p-5678).\nIf no tickets, write \"None.\"\n\n### Overview\n2-3 sentences: What was accomplished this session.\n\n### Decisions\nBullet list of choices made and why. Include:\n- What was decided\n- Alternatives considered\n- Rationale for the choice\nTag each: (auto) if you decided, (human) if the user decided.\nIf none, write \"None.\"\n\n### Problems\nBullet list of bugs, blockers, or things that didn't work.\nInclude resolution status: (resolved) or (unresolved).\nTag each with a friction category: (buggy_code), (wrong_approach), (env_constraint), (misunderstood_intent), or (excessive_iteration).\nIf none, write \"None.\"\n\n### Discoveries\nBullet list of new understanding gained about the codebase, tools, or domain.\nIf none, write \"None.\"\n\n### Incomplete Work\nBullet list of work started but not finished.\nInclude enough context to resume or create a follow-up ticket.\nIf none, write \"None.\"\n\n### Outcome\nRate session outcome: fully_achieved | mostly_achieved | partially_achieved | not_achieved\nOne sentence justification.\n\n### Metrics\n- Files touched: <number>\n- Estimated scope: small | medium | large\n- Estimated output tokens: <number or unknown>\n\n<!-- END_SESSION_SUMMARY -->\n\nOutput the summary now.",
-            "timeout": 120
+            "prompt": "Before this context is compacted, update the active ticket with a session exit block.\n\nAppend these markers to the active ticket file (use the Edit or Write tool):\n\n<!-- checkpoint: <current-phase: triage|spec|design|implement|test|verify> -->\n<!-- exit-state: <one sentence: what you were doing, where you stopped, immediate next step> -->\n<!-- key-files: <comma-separated file paths load-bearing for resuming this work> -->\n<!-- open-questions: <unresolved questions for the next session, or 'none'> -->\n\nRules:\n- Write to the ticket file directly — not to chat output\n- Keep exit-state to one sentence\n- If no ticket is active or work is complete, skip this entirely\n- Do not include secrets or personal data",
+            "timeout": 60
           }
         ]
       }
@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/extract-session-summary.sh\"",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cmd\" exit-state.sh",
             "timeout": 30
           }
         ]
