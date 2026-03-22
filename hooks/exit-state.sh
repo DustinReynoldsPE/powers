@@ -51,9 +51,6 @@ fi
 # Emit a prompt that asks the agent to write the exit block
 cat <<EOF
 {
-  "hookSpecificOutput": {
-    "hookEventName": "SessionEnd",
-    "additionalContext": "Before this session ends, update the active ticket${ticket_hint} with a session exit block. Append these HTML comment markers to the ticket file:\n\n\`\`\`\n<!-- checkpoint: <current-phase> -->\n<!-- exit-state: <one sentence: what you were doing, where you stopped, immediate next step> -->\n<!-- key-files: <comma-separated paths that are load-bearing for resuming> -->\n<!-- open-questions: <anything unresolved that the next session should address, or 'none'> -->\n\`\`\`\n\nIf no ticket is active or the work is complete, skip this. Keep exit-state to one sentence."
-  }
+  "systemMessage": "Before this session ends, update the active ticket${ticket_hint} with a session exit block. Append these HTML comment markers to the ticket file:\n\n\`\`\`\n<!-- checkpoint: <current-phase> -->\n<!-- exit-state: <one sentence: what you were doing, where you stopped, immediate next step> -->\n<!-- key-files: <comma-separated paths that are load-bearing for resuming> -->\n<!-- open-questions: <anything unresolved that the next session should address, or 'none'> -->\n\`\`\`\n\nIf no ticket is active or the work is complete, skip this. Keep exit-state to one sentence."
 }
 EOF
