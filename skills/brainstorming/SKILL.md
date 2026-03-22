@@ -34,7 +34,7 @@ Verify `tk` is installed. If unavailable, stop and tell the user to install it.
 
 **Implementation (if continuing):**
 - Ask: "Ready to set up for implementation?"
-- Use `powers:create-tickets` to create epic/tasks with the design
+- Use `/create-feature` to set up for implementation with the design
 
 ## Principles
 
@@ -43,4 +43,3 @@ Verify `tk` is installed. If unavailable, stop and tell the user to install it.
 - YAGNI ruthlessly
 - Explore alternatives before settling
 - Incremental validation
-- If the work involves CSS, styling, theming, or web UX, invoke `powers:css-architecture` for conventions

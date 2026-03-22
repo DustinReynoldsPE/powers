@@ -17,7 +17,6 @@ Before asking anything, read the affected code path:
 - Identify the entry point (route, handler, component, command)
 - Trace the data flow through the relevant modules
 - Note recent changes: `git log --oneline -10 -- <affected files>`
-- If CSS/styling issue, invoke `powers:css-architecture` for conventions
 
 Build a mental model of how the code is *supposed* to work before investigating why it doesn't.
 

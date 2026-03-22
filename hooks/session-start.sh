@@ -36,7 +36,7 @@ cat <<EOF
 {
   "hookSpecificOutput": {
     "hookEventName": "SessionStart",
-    "additionalContext": "Powers plugin loaded. Run /create-feature, /create-bug, /work-ticket, /finishing-branch, /brainstorming.\n\n${content_escaped}"
+    "additionalContext": "Powers plugin loaded. Run /create-feature, /create-bug, /work-ticket, /finishing-branch, /brainstorming, /investigate.\n\n${content_escaped}"
   }
 }
 EOF

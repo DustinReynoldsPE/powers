@@ -20,8 +20,6 @@ skills/
   create-bug/           # /create-bug - Bug workflow
   work-ticket/          # /work-ticket - Resume based on ticket type
   investigate/          # /investigate - Debugging methodology
-  css-architecture/     # CSS token system and semantic styling
-  create-tickets/       # Convert designs to tk epics/tasks
   using-powers/         # Meta-skill injected at session start
   tk-list/              # /tk-list - List tickets with filters
   tk-ready/             # /tk-ready - Show ready tickets

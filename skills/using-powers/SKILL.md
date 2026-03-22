@@ -21,6 +21,14 @@ Structured development workflows using tk tickets.
 
 - `/finishing-branch` — Close out a branch: PR, merge, keep, or discard. Removes worktree.
 
+## Debugging
+
+- `/investigate` — Disciplined debugging methodology: structured intake, logging-first, 3-patch rule
+
+## Design
+
+- `/brainstorming` — Socratic design refinement before implementation
+
 ## Principles
 
 One ticket = one branch = one PR. Each workflow creates an isolated worktree, works on a ticket branch, and finishes with a PR or local merge.

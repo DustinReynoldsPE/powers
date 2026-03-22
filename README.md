@@ -197,8 +197,6 @@ skills/
   using-git-worktrees/  # Branch isolation per ticket
   finishing-branch/   # 4-option branch completion (PR/merge/keep/discard)
   subagent-execution/ # Per-task subagent dispatch with two-stage review
-  css-architecture/   # CSS token system and semantic styling
-  create-tickets/     # Epic/task generation
   using-powers/       # Session start context
   tk-list/            # Ticket listing
   tk-ready/           # Ready tickets
