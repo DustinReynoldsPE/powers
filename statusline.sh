@@ -15,8 +15,8 @@ BAR_WIDTH=10
 FILLED=$((PCT * BAR_WIDTH / 100))
 EMPTY=$((BAR_WIDTH - FILLED))
 BAR=""
-[ "$FILLED" -gt 0 ] && BAR=$(printf "%${FILLED}s" | tr ' ' '▓')
-[ "$EMPTY" -gt 0 ] && BAR="${BAR}$(printf "%${EMPTY}s" | tr ' ' '░')"
+for ((i=0; i<FILLED; i++)); do BAR="${BAR}▓"; done
+for ((i=0; i<EMPTY; i++)); do BAR="${BAR}░"; done
 
 # Usage Duration
 DURATION_SEC=$((DURATION_MS / 1000))
