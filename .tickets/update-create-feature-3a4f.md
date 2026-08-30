@@ -1,14 +1,14 @@
 ---
 id: update-create-feature-3a4f
 stage: triage
-status: needs_testing
+status: closed
 deps: [git-worktree-integration-9f15, branch-finishing-workflow-1c6f]
 links: []
 created: 2026-03-03T22:23:40Z
 type: task
 priority: 1
 parent: branch-based-worktree-499c
-version: 3
+version: 4
 ---
 # Update create-feature and create-bug to use branch workflow
 

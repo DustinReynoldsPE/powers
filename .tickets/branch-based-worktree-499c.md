@@ -1,13 +1,13 @@
 ---
 id: branch-based-worktree-499c
 stage: triage
-status: needs_testing
+status: closed
 deps: []
 links: []
 created: 2026-03-03T22:23:16Z
 type: epic
 priority: 1
-version: 1
+version: 3
 ---
 # Branch-based worktree workflow
 

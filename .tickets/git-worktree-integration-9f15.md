@@ -1,14 +1,14 @@
 ---
 id: git-worktree-integration-9f15
 stage: triage
-status: needs_testing
+status: closed
 deps: []
 links: []
 created: 2026-03-03T22:23:25Z
 type: feature
 priority: 1
 parent: branch-based-worktree-499c
-version: 6
+version: 7
 ---
 # Git worktree integration skill
 
